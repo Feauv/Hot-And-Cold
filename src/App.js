@@ -9,8 +9,8 @@ class App extends React.Component {
     this.windowOnLoad = this.windowOnLoad.bind(this)
     this.getPositionAtCenter = this.getPositionAtCenter.bind(this)
     this.getDistanceBetweenElements = this.getDistanceBetweenElements.bind(this)
-    this.hot = 255
-    this.cold = 0
+    this.hot = 0
+    this.cold = 255
   }
 
   componentDidMount() {
@@ -29,7 +29,7 @@ class App extends React.Component {
       )
 
       // Win condition along with Hot & Cold calculations to change the color. The circle starts changing 
-      // from red to blue once it is 510px (255 * 2) away from the hidden div.
+      // from blue to red once it is 510px (255 * 2) away from the hidden div.
       if(distance <= 10) {
         const yGeneration = Math.round(0 + Math.random() * (window.innerHeight - 0))
         const xGeneration = Math.round(0 + Math.random() * (window.innerWidth - 0))
@@ -41,15 +41,15 @@ class App extends React.Component {
       } else if(distance < 510) {
         this.setState((state, props) => {
           return {
-            hot: distance/2,
-            cold: (510 - distance)/2
+            hot: (510 - distance)/2,
+            cold: distance/2
           };
         });
       } else {
         this.setState((state, props) => {
           return {
-            hot: 255,
-            cold: 0
+            hot: 0,
+            cold: 255
           };
         });
       }
@@ -92,7 +92,7 @@ class App extends React.Component {
   windowOnLoad() {
     $('#mouse-location').css({
       position: "absolute",
-      "background-color": "red",
+      "background-color": "blue",
       height: 50,
       width: 50,
       "border-style": "solid",
